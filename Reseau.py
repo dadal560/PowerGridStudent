@@ -34,13 +34,14 @@ class Reseau:
         self.strat = strat
 
     def valider_reseau(self) -> bool:
-        # TODO
-        return False
+        return len(self.arcs) >= len(self.noeuds) - 1
 
     def valider_distribution(self, t: Terrain) -> bool:
-        # TODO
-        return False
-
+        for client in t.get_clients():
+            if client not in self.noeuds.values():
+                return False
+        return True
+    
     def configurer(self, t: Terrain):
         self.noeud_entree, self.noeuds, self.arcs  = self.strat.configurer(t)
 
